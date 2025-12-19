@@ -3,3 +3,16 @@
 ## Exercises
 
 ### Chapter 2
+
+- [1.1.] ()
+- [1.2.] ()
+- [1.3.] ()
+- [1.4.] ()
+
+### Chapter 3
+
+### Chapter 4
+
+### Chapter 5
+
+### Chapter 6
