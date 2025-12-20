@@ -4,7 +4,7 @@
 
 ### Chapter 2
 
-- [1.1.] ()
+- [1.1.] (https://github.com/OlaviKom/k8s-labs/tree/1.1)
 - [1.2.] ()
 - [1.3.] ()
 - [1.4.] ()
