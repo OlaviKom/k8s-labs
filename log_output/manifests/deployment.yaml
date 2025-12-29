@@ -12,9 +12,20 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-data
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: anttihanki/log-output:0.1.1
+        - name: data-writer
+          image: anttihanki/log-output-writer:0.1.0
+          volumeMounts:
+          - name: shared-data
+            mountPath: /files
+        - name: data-reader
+          image: anttihanki/log-output-reader:0.1.1
+          volumeMounts:
+          - name: shared-data
+            mountPath: /files
           env:
             - name: PORT
               value: "8020" 
