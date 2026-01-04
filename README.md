@@ -14,6 +14,7 @@
 - [1.8.](https://github.com/OlaviKom/k8s-labs/tree/1.8)
 - [1.9.](https://github.com/OlaviKom/k8s-labs/tree/1.9)
 - [1.10.](https://github.com/OlaviKom/k8s-labs/tree/1.10)
+- [1.11.](https://github.com/OlaviKom/k8s-labs/tree/1.11)
 
 ### Chapter 3
 
