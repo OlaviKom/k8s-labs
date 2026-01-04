@@ -14,15 +14,11 @@ spec:
     spec:
       volumes:
         - name: shared-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: log-output-claim
       containers:
-        - name: data-writer
-          image: anttihanki/log-output-writer:0.1.0
-          volumeMounts:
-          - name: shared-data
-            mountPath: /files
         - name: data-reader
-          image: anttihanki/log-output-reader:0.1.1
+          image: anttihanki/log-output-reader:0.1.3
           volumeMounts:
           - name: shared-data
             mountPath: /files

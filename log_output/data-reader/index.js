@@ -5,12 +5,18 @@ const fs = require("fs/promises");
 const PORT = process.env.PORT || 8080;
 
 app.get("/", async (req, res) => {
+  let pingpongCount = "Ping / pongs 0";
+
   try {
-    const response = await fs.readFile("/files/log_output.log", "utf-8");
-    res.type("text/plain").send(response);
+    pingpongCount = await fs.readFile("/files/pingpong.log", "utf-8");
   } catch (err) {
-    res.status(500).send(`No data available yet`);
+    if (err.code !== "ENOENT") {
+      res.status(500).send(`Error in reading file: ${err}`);
+    }
   }
+  const timestamp = new Date().toISOString();
+
+  res.type("text/plain").send(`${timestamp}\n${pingpongCount}`);
 });
 
 app.listen(PORT, () => {

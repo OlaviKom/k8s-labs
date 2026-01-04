@@ -1,13 +1,15 @@
 const express = require("express");
 const app = express();
+const fs = require("fs/promises");
 
 const PORT = process.env.PORT || 8080;
 
 var counter = 0;
 
-app.get("/pingpong", (req, res) => {
-  res.send(`pong ${counter}`);
+app.get("/pingpong", async (req, res) => {
   counter++;
+  await fs.writeFile("/files/pingpong.log", `Ping / pongs ${counter}`);
+  res.send(`pong ${counter}`);
 });
 
 app.listen(PORT, () => {
