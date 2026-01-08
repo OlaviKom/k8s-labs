@@ -8,7 +8,6 @@ var counter = 0;
 
 app.get("/pingpong", async (req, res) => {
   counter++;
-  await fs.writeFile("/files/pingpong.log", `Ping / pongs ${counter}`);
   res.send(`pong ${counter}`);
 });
 
