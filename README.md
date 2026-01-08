@@ -20,6 +20,8 @@
 
 ### Chapter 3
 
+- [2.1.](https://github.com/OlaviKom/k8s-labs/tree/2.1)
+
 ### Chapter 4
 
 ### Chapter 5
