@@ -23,6 +23,7 @@
 - [2.1](https://github.com/OlaviKom/k8s-labs/tree/2.1)
 - [2.2](https://github.com/OlaviKom/k8s-labs/tree/2.2)
 - [2.3](https://github.com/OlaviKom/k8s-labs/tree/2.3)
+- [2.4](https://github.com/OlaviKom/k8s-labs/tree/2.4)
 
 ### Chapter 4
 
