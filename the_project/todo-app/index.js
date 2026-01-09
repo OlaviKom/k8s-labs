@@ -33,11 +33,11 @@ const fetchImage = async () => {
 };
 
 app.get("/", async (req, res) => {
-  await fetchImage();
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.get("/image", async (req, res) => {
+  await fetchImage();
   res.sendFile(IMAGE_PATH);
 });
 
