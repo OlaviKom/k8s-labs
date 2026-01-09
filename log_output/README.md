@@ -1,8 +1,8 @@
 # Log output app
 
-The application shows timestamp and how many request is done to /pingpong
+The application shows timestamp, random string and how many request is done to /pingpong
 
-create a directory at `/tmp/kube` in the container `k3d-k3s-default-agent-0`. This can simply be done via `docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube`
+Create namespace `kubectl create namespace exercises`
 
 Navigate to app `cd path/to/log_output`
 
