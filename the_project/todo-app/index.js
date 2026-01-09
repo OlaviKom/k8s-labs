@@ -11,6 +11,9 @@ const IMAGE_DIR = "/app/data";
 const IMAGE_PATH = path.join(IMAGE_DIR, "image.jpg");
 const TIMELIMIT = 10 * 60 * 1000;
 
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
 const isImageCacheValid = async () => {
   try {
     const stats = await fsPromises.stat(IMAGE_PATH);
@@ -31,7 +34,7 @@ const fetchImage = async () => {
 
 app.get("/", async (req, res) => {
   await fetchImage();
-  res.sendFile(path.join(__dirname, "/index.html"));
+  res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.get("/image", async (req, res) => {
