@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: project
   name: todo-app-dep
 spec:
   replicas: 1
@@ -18,7 +19,7 @@ spec:
           claimName: todo-app-claim
       containers:
         - name: todo-app
-          image: anttihanki/todo-app:0.2.4
+          image: anttihanki/todo-app:0.2.5
           volumeMounts:
           - name: todo-app-data
             mountPath: /app/data
