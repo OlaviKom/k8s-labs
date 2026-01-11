@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const { randomUUID } = require("crypto");
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.BACKEND_PORT;
 
 app.use(express.json());
 

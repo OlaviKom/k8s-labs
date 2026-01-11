@@ -5,11 +5,12 @@ const axios = require("axios");
 const fsPromises = require("fs/promises");
 const fs = require("fs");
 
-const PORT = process.env.PORT || 8080;
-const IMAGE_URL = "https://picsum.photos/1200";
-const IMAGE_DIR = "/app/data";
-const IMAGE_PATH = path.join(IMAGE_DIR, "image.jpg");
-const TIMELIMIT = 10 * 60 * 1000;
+const PORT = process.env.APP_PORT;
+const IMAGE_URL = process.env.IMAGE_URL;
+const IMAGE_DIR = process.env.IMAGE_DIR;
+const IMAGE_NAME = process.env.IMAGE_NAME;
+const IMAGE_PATH = path.join(IMAGE_DIR, IMAGE_NAME);
+const TIMELIMIT = Number(process.env.TIMELIMIT);
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));

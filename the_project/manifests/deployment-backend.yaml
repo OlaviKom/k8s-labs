@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: anttihanki/todo-backend:0.1.1
-          env:
-          - name: PORT 
-            value: "8010"
+          image: anttihanki/todo-backend:0.1.2
+          envFrom:
+          - configMapRef:
+              name: todo-app-config
