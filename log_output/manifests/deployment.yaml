@@ -15,7 +15,26 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: anttihanki/log-output:0.2.0
+          image: anttihanki/log-output:0.2.1
           env:
             - name: PORT
-              value: "8020" 
+              value: "8020"
+
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
+
+          volumeMounts:
+          - name: config
+            mountPath: /config
+            readOnly: true
+
+      volumes:
+      - name: config
+        configMap: 
+          name: log-output-config
+          items:
+          - key: information.txt
+            path: information.txt
