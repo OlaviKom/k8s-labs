@@ -10,7 +10,7 @@ async function addTodo() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({ content: text }),
   });
 
   input.value = "";
@@ -24,7 +24,7 @@ async function loadTodos() {
   list.innerHTML = "";
   todos.forEach((todo) => {
     const li = document.createElement("li");
-    li.textContent = todo.text;
+    li.textContent = todo.content;
     list.appendChild(li);
   });
 }

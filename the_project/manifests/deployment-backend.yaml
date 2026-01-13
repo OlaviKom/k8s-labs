@@ -15,7 +15,13 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: anttihanki/todo-backend:0.1.2
+          image: anttihanki/todo-backend:0.1.3
           envFrom:
           - configMapRef:
               name: todo-app-config
+          - secretRef:
+              name: todo-db-secret
+          - configMapRef:
+              name: todo-db-config
+
+    

@@ -8,16 +8,17 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: /
-        backend:
-          service:
-            name: todo-app-svc
-            port: 
-              number: 1234
-      - pathType: Prefix
         path: /todos
         backend:
           service:
             name: todo-backend-svc
             port:
               number: 1345
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: todo-app-svc
+            port: 
+              number: 1234
+      

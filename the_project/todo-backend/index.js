@@ -1,30 +1,72 @@
 const express = require("express");
 const app = express();
-const { randomUUID } = require("crypto");
+const { Client } = require("pg");
 
 const PORT = process.env.BACKEND_PORT;
 
 app.use(express.json());
 
-let todos = [];
+const client = new Client({
+  host: process.env.DB_HOST,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  port: Number(process.env.DB_PORT),
+});
+
+const initDB = async () => {
+  await client.connect();
+
+  await client.query(`
+    CREATE TABLE IF NOT EXISTS todo(
+    id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL)`);
+};
 
 app.get("/todos", async (req, res) => {
-  res.json(todos);
+  try {
+    const result = await client.query(`SELECT * FROM todo`);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error("Query failed", err);
+    res.status(500).send("Database error");
+  }
 });
 
 app.post("/todos", async (req, res) => {
-  const todoText = req.body.text;
+  const todoContent = req.body.content;
 
-  if (!todoText) {
+  if (!todoContent) {
     return res.status(400).json({ error: "Missing todo text!" });
   }
 
-  const todo = { id: randomUUID(), text: todoText };
-  todos.push(todo);
-
-  res.status(201).json(todo);
+  try {
+    const result = await client.query(
+      `
+      INSERT INTO todo (content)
+      VALUES ($1)
+      RETURNING *
+      `,
+      [todoContent]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Query failed", err);
+    res.status(500).send("Database error");
+  }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const start = async () => {
+  try {
+    await initDB();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("DB init failed", err);
+    process.exit(1);
+  }
+};
+
+start();
