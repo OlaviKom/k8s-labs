@@ -3,3 +3,4 @@ log_output/node_modules
 the_project/node_modules
 ping-pong/node_modules
 *node_modules
+*secret.yaml

@@ -15,7 +15,12 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: anttihanki/ping-pong:0.1.3
+          image: anttihanki/ping-pong:0.1.7
           env:
-            - name: PORT
-              value: "8030" 
+          - name: PORT
+            value: "8030"
+          envFrom:
+          - secretRef:
+              name: pingpong-db-secret
+          - configMapRef:
+              name: pingpong-config
