@@ -37,10 +37,17 @@ app.post("/todos", async (req, res) => {
   const todoContent = req.body.content;
 
   if (!todoContent) {
+    console.warn("[TODO] Missing content!");
     return res.status(400).json({ error: "Missing todo text!" });
   }
 
+  if (todoContent.length > 140) {
+    console.warn("[TODO] Content too long", { length: todoContent.length });
+    return res.status(400).json({ error: "Todo length over 140 characters" });
+  }
+
   try {
+    console.log("[TODO] Creating todo");
     const result = await client.query(
       `
       INSERT INTO todo (content)
@@ -49,9 +56,14 @@ app.post("/todos", async (req, res) => {
       `,
       [todoContent]
     );
+
+    console.log("[TODO] Created todo", {
+      id: result.rows[0].id,
+      content: result.rows[0].content,
+    });
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error("Query failed", err);
+    console.error("[DB] Insert failed", err);
     res.status(500).send("Database error");
   }
 });
