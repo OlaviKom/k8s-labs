@@ -33,6 +33,8 @@
 
 ### Chapter 4
 
+- [3.1](https://github.com/OlaviKom/k8s-labs/tree/3.1)
+
 ### Chapter 5
 
 ### Chapter 6
