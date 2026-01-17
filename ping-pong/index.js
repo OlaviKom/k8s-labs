@@ -28,6 +28,10 @@ const initDB = async () => {
     ON CONFLICT (id) DO NOTHING`);
 };
 
+app.get("/", async (req, res) => {
+  res.status(200).send("ok");
+});
+
 app.get("/pingpong", async (req, res) => {
   try {
     const result = await client.query(`

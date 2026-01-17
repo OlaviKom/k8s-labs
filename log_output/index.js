@@ -11,17 +11,31 @@ const CONFIG_FILE = "/config/information.txt";
 const randomString = randomUUID();
 
 app.get("/", async (req, res) => {
-  const response = await axios.get(PINGPONG_URL);
-  const pingpongCount = response.data.split(" ")[1];
-  const fileContent = await fs.readFile(CONFIG_FILE);
-  const envVariable = process.env.MESSAGE;
+  res.status(200).send("ok");
+});
 
-  const timestamp = new Date().toISOString();
+app.get("/log", async (req, res) => {
+  try {
+    const response = await axios.get(PINGPONG_URL);
+    const pingpongCount = response.data.split(" ")[1];
+    const fileContent = await fs.readFile(CONFIG_FILE);
+    const envVariable = process.env.MESSAGE;
 
-  res.type("text/plain").send(`file content: ${fileContent}\n
-env variable: ${envVariable}\n
-${timestamp}: ${randomString}\n
-Ping / Pongs: ${pingpongCount}`);
+    const timestamp = new Date().toISOString();
+
+    res
+      .status(200)
+      .type("text/plain")
+      .send(
+        `file content: ${fileContent}
+env variable: ${envVariable}
+${timestamp}: ${randomString}
+Ping / Pongs: ${pingpongCount}`,
+      );
+  } catch (err) {
+    console.error("Request failed", err.message);
+    res.status(500).send("Internal error");
+  }
 });
 
 app.listen(PORT, () => {
