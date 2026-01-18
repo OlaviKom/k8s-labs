@@ -35,6 +35,7 @@
 
 - [3.1](https://github.com/OlaviKom/k8s-labs/tree/3.1)
 - [3.2](https://github.com/OlaviKom/k8s-labs/tree/3.2)
+- [3.3](https://github.com/OlaviKom/k8s-labs/tree/3.3)
 
 ### Chapter 5
 
