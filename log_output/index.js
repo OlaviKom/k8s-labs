@@ -5,16 +5,12 @@ const axios = require("axios");
 const { randomUUID } = require("crypto");
 
 const PORT = process.env.PORT || 8080;
-const PINGPONG_URL = "http://ping-pong-svc:2450/pingpong";
+const PINGPONG_URL = "http://ping-pong-svc:2450/";
 const CONFIG_FILE = "/config/information.txt";
 
 const randomString = randomUUID();
 
 app.get("/", async (req, res) => {
-  res.status(200).send("ok");
-});
-
-app.get("/log", async (req, res) => {
   try {
     const response = await axios.get(PINGPONG_URL);
     const pingpongCount = response.data.split(" ")[1];
@@ -36,6 +32,10 @@ Ping / Pongs: ${pingpongCount}`,
     console.error("Request failed", err.message);
     res.status(500).send("Internal error");
   }
+});
+
+app.get("/healthz", (req, res) => {
+  res.status(200).send("ok");
 });
 
 app.listen(PORT, () => {

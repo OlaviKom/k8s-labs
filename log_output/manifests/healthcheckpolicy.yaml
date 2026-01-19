@@ -1,0 +1,36 @@
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: ping-pong-healthcheck
+  namespace: exercises
+spec:
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        requestPath: /healthz
+        port: 8030
+  
+  targetRef:
+    group: ""
+    kind: Service
+    name: ping-pong-svc
+
+--- 
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: log-output-healthcheck
+  namespace: exercises
+spec:
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        requestPath: /healthz
+        port: 8020
+  
+  targetRef:
+    group: ""
+    kind: Service
+    name: log-output-svc

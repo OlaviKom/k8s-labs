@@ -29,10 +29,6 @@ const initDB = async () => {
 };
 
 app.get("/", async (req, res) => {
-  res.status(200).send("ok");
-});
-
-app.get("/pingpong", async (req, res) => {
   try {
     const result = await client.query(`
     UPDATE pingpong
@@ -44,6 +40,10 @@ app.get("/pingpong", async (req, res) => {
     console.error("Query failed", err);
     res.status(500).send("Database error");
   }
+});
+
+app.get("/healthz", (req, res) => {
+  res.status(200).send("ok");
 });
 
 const start = async () => {
