@@ -42,6 +42,10 @@ app.get("/image", async (req, res) => {
   res.sendFile(IMAGE_PATH);
 });
 
+app.get("/healthz", (req, res) => {
+  res.status(200).send("ok");
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

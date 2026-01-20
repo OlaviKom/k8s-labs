@@ -54,7 +54,7 @@ app.post("/todos", async (req, res) => {
       VALUES ($1)
       RETURNING *
       `,
-      [todoContent]
+      [todoContent],
     );
 
     console.log("[TODO] Created todo", {
@@ -66,6 +66,10 @@ app.post("/todos", async (req, res) => {
     console.error("[DB] Insert failed", err);
     res.status(500).send("Database error");
   }
+});
+
+app.get("/healthz", (req, res) => {
+  res.status(200).send("ok");
 });
 
 const start = async () => {

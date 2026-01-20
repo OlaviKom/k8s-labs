@@ -1,0 +1,36 @@
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: todo-app-healthcheck
+  namespace: project
+spec:
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        requestPath: /healthz
+        port: 8000
+  
+  targetRef:
+    group: ""
+    kind: Service
+    name: todo-app-svc
+
+--- 
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: todo-backend-healthcheck
+  namespace: project
+spec:
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        requestPath: /healthz
+        port: 8010
+  
+  targetRef:
+    group: ""
+    kind: Service
+    name: todo-backend-svc

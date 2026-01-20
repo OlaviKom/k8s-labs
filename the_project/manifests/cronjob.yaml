@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: todo-cronjob
-            image: anttihanki/todo-cron:0.1.0
+            image: anttihanki/todo-cron:0.1.1
             env:
             - name: URL
               value: https://en.wikipedia.org/wiki/Special:Random
