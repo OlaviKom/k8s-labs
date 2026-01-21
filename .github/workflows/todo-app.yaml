@@ -54,10 +54,8 @@ jobs:
       - name: 'Debug paths'
         run: |
           pwd
-          echo "IMAGE_TAG=$IMAGE_TAG"
           echo "BUILD_CONTEXT=$BUILD_CONTEXT"
-          echo "IMAGE_TAG=${{ env.IMAGE_TAG }}"
-          echo "BUILD_CONTEXT=${{ env.BUILD_CONTEXT }}" 
+          ls $BUILD_CONTEXT
 
       - name: Build
         run: docker build --tag $IMAGE_TAG $BUILD_CONTEXT
