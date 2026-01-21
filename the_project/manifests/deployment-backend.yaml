@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: anttihanki/todo-backend:0.1.7
+          image: PROJECT/TODO_BACKEND_IMAGE
           envFrom:
           - configMapRef:
               name: todo-app-config
