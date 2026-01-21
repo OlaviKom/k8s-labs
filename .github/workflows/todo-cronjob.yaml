@@ -51,7 +51,7 @@ jobs:
         run: echo "IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Build
-        run: docker build --tag $IMAGE_TAG $BUILD_CONTEXT
+        run: docker build --tag $IMAGE_TAG the_project/todo-cron
 
       - name: Publish
         run: docker push $IMAGE_TAG
@@ -61,6 +61,6 @@ jobs:
 
       - name: Deploy
         run: |-
-          cd $KUSTOMIZE_PATH
+          cd the_project
           kustomize edit set image PROJECT/TODO_CRONJOB_IMAGE=$IMAGE_TAG
           kustomize build . | kubectl apply -f -
