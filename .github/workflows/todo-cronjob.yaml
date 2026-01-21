@@ -1,4 +1,4 @@
-name: Release todo cronjob application
+name: Release todo cronjob app
 
 on:
   push:
