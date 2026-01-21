@@ -8,7 +8,6 @@ images:
 resources:
   - manifests/config-db.yaml
   - manifests/config.yaml
-  - manifests/secret.yaml
   - manifests/statefulset.yaml
   - manifests/healthcheckpolicy.yaml
   - manifests/gateway.yaml
