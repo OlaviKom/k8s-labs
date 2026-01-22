@@ -2,8 +2,6 @@ name: Release todo app
 
 on:
   push:
-    branches: 
-    - main
     paths:
       - 'the_project/todo-app/**'
       - 'the_project/todo-backend/**'
@@ -25,7 +23,6 @@ env:
   SERVICE_APP: todo-app-dep
   SERVICE_BACKEND: todo-backend-dep
   KUSTOMIZE_PATH: the_project
-  NAMESPACE: project
   BRANCH: ${{ github.ref_name }}
 
 jobs:
@@ -77,9 +74,22 @@ jobs:
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2.1.0
 
+      - name: Set namespace main
+        if: github.ref_name == "main"
+        run: |
+          echo "NAMESPACE=project" >> $GITHUB_ENV
+
+      - name: Set namespace not main
+        if: github.ref_name != "main"
+        run: |
+          echo "NAMESPACE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          
       - name: Deploy
         run: |-
           cd $KUSTOMIZE_PATH
+          kubectl create namespace "$NAMESPACE" || true
+          kubectl config set-context --current --namespace="$NAMESPACE"
+          kustomize edit set namespace "$NAMESPACE"
           kustomize edit set image PROJECT/TODO_APP_IMAGE="$IMAGE_TAG_APP"
           kustomize edit set image PROJECT/TODO_BACKEND_IMAGE="$IMAGE_TAG_BACKEND"
           kustomize edit set image PROJECT/TODO_CRONJOB_IMAGE="$IMAGE_TAG_CRONJOB"
