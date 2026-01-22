@@ -25,6 +25,7 @@ env:
   SERVICE_APP: todo-app-dep
   SERVICE_BACKEND: todo-backend-dep
   KUSTOMIZE_PATH: the_project
+  NAMESPACE: project
   BRANCH: ${{ github.ref_name }}
 
 jobs:
@@ -83,6 +84,6 @@ jobs:
           kustomize edit set image PROJECT/TODO_BACKEND_IMAGE="$IMAGE_TAG_BACKEND"
           kustomize edit set image PROJECT/TODO_CRONJOB_IMAGE="$IMAGE_TAG_CRONJOB"
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment $SERVICE_APP
-          kubectl rollout status deployment $SERVICE_BACKEND
+          kubectl rollout status deployment $SERVICE_APP -n "$NAMESPACE"
+          kubectl rollout status deployment $SERVICE_BACKEND -n "$NAMESPACE"
           kubectl get services -o wide
