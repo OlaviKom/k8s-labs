@@ -5,3 +5,5 @@ ping-pong/node_modules
 *node_modules
 *secret.yaml
 log_output/manifests-disabled
+the_project/manifests-disabled
+workflows-disabled
