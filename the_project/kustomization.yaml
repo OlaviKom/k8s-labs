@@ -14,7 +14,6 @@ resources:
   - manifests/route.yaml
   - manifests/deployment-backend.yaml
   - manifests/deployment.yaml
-  - manifests/ingress.yaml
   - manifests/persistentvolumeclaim.yaml
   - manifests/service-backend.yaml
   - manifests/service.yaml
