@@ -1,0 +1,48 @@
+name: Branch delete
+
+on:
+  delete:
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+  REGISTRY: europe-north1-docker.pkg.dev
+  
+jobs:
+  delete-environment:
+    if: github.event.ref_name == 'branch' 
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: 'Use gcloud CLI'
+        run: gcloud info
+
+      - run: gcloud --quiet auth configure-docker "$REGISTRY"
+
+      - name: 'Get GKE credentials'
+        uses: 'google-github-actions/get-gke-credentials@v2'
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER }}'
+          project_id: '${{ env.PROJECT_ID }}'
+          location: '${{ env.GKE_ZONE }}'
+
+      - name: Set namespace
+        run: |
+          echo "NAMESPACE=${{ github.event.ref }}" >> $GITHUB_ENV
+
+      - name: delete environment
+        run: | 
+         kubectl delete namespace "$NAMESPACE"
+
+    
+      
+
+
