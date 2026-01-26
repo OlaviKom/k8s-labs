@@ -16,6 +16,13 @@ spec:
       containers:
         - name: todo-backend
           image: PROJECT/TODO_BACKEND_IMAGE
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "300m"
           envFrom:
           - configMapRef:
               name: todo-app-config
