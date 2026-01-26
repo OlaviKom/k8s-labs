@@ -6,6 +6,7 @@ on:
       - 'the_project/todo-app/**'
       - 'the_project/todo-backend/**'
       - 'the_project/todo-cron/**'
+      - 'the_project/manifests/**'
       - '.github/workflows/main.yaml'
     
 env:
