@@ -51,3 +51,9 @@ The service provider takes care of backing up databases as part of the service. 
 ### DIY
 
 You have to take care of backing up databases by yourself. More work for you. It cost that much what it takes to make system to for backups. There can be example cronjob which takes automaticly backups from datebase at certain time. Example there can be done physical backup from database to another disk or take a snapshot about database.
+
+# Exercise 3.12
+
+## Logging
+
+![Backend logs when new todo is created](exercise_3-12.png)
