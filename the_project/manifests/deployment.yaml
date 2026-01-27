@@ -24,7 +24,7 @@ spec:
           image: PROJECT/TODO_APP_IMAGE
           resources:
             requests:
-              memory: "32Mi"
+              memory: "16Mi"
               cpu: "50m"
             limits:
               memory: "192Mi"
