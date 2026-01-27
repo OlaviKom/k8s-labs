@@ -56,4 +56,6 @@ You have to take care of backing up databases by yourself. More work for you. It
 
 ## Logging
 
+Backend logs in Google Logging when new todo is created.
+
 ![Backend logs when new todo is created](exercise_3-12.png)
