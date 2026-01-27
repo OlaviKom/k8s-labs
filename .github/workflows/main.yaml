@@ -90,6 +90,13 @@ jobs:
           cd $KUSTOMIZE_PATH
           kubectl create namespace "$NAMESPACE" || true
           kubectl config set-context --current --namespace="$NAMESPACE"
+
+          kubectl create secret generic todo-db-secret \
+            --from-literal=POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
+            --from-literal=POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+            -n "$NAMESPACE" \
+            --dry-run=client -o yaml | kubectl apply -f -
+
           kustomize edit set namespace "$NAMESPACE"
           kustomize edit set image PROJECT/TODO_APP_IMAGE="$IMAGE_TAG_APP"
           kustomize edit set image PROJECT/TODO_BACKEND_IMAGE="$IMAGE_TAG_BACKEND"
