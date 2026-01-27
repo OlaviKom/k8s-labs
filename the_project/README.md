@@ -1,10 +1,20 @@
 # Todo App
 
-For the PersistentVolume to work you first need to create the local path in the node we are binding it to. create a directory at `/tmp/kube` in the container `k3d-k3s-default-agent-0`. This can simply be done via `docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube`
+## requirements
 
-Navigate to app `cd path/to/the_project`
+- Google kubernetes Engine GKE cluster
+- Google Artifact Registery for images
+- GitHub repository where are next secrets:
+  - POSTGRES_USER
+  - POSTGRES_PASSWORD
+  - GKE_PROJECT
+  - GKE_SA_KEY
 
-Deploy with `kubectl apply -f manifests/`
+## Deploy
+
+- Create GKE cluster and Artifact Registery
+- Create secrets
+- Run main.yaml GitHub Action
 
 # Exercise 3.9
 
