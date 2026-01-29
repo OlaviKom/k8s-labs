@@ -15,11 +15,17 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: anttihanki/log-output:0.2.5
+          image: anttihanki/log-output:0.2.8
+          readinessProbe:
+           initialDelaySeconds: 10
+           periodSeconds: 5
+           httpGet:
+            path: /healthz
+            port: 8020
           env:
             - name: PORT
               value: "8020"
-
+          
             - name: MESSAGE
               valueFrom:
                 configMapKeyRef:

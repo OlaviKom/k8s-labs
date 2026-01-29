@@ -5,7 +5,7 @@ const axios = require("axios");
 const { randomUUID } = require("crypto");
 
 const PORT = process.env.PORT || 8080;
-const PINGPONG_URL = "http://ping-pong-svc:2450/";
+const PINGPONG_URL = "http://ping-pong-svc:2450";
 const CONFIG_FILE = "/config/information.txt";
 
 const randomString = randomUUID();
@@ -34,7 +34,16 @@ Ping / Pongs: ${pingpongCount}`,
   }
 });
 
-app.get("/healthz", (req, res) => {
+app.get("/healthz", async (req, res) => {
+  try {
+    const ready = await axios.get(`${PINGPONG_URL}/healthz`);
+    res.status(200).send("ok");
+  } catch {
+    res.status(500).send("pingpong not ready");
+  }
+});
+
+app.get("/healthz-lb", (req, res) => {
   res.status(200).send("ok");
 });
 

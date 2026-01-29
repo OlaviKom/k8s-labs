@@ -15,7 +15,13 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: anttihanki/ping-pong:0.2.2
+          image: anttihanki/ping-pong:0.2.4
+          readinessProbe:
+           initialDelaySeconds: 10
+           periodSeconds: 5
+           httpGet:
+            path: /healthz
+            port: 8030
           env:
           - name: PORT
             value: "8030"

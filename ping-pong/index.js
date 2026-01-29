@@ -42,7 +42,16 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/healthz", (req, res) => {
+app.get("/healthz", async (req, res) => {
+  try {
+    await client.query("SELECT 1");
+    res.status(200).send("ok");
+  } catch (err) {
+    res.status(500).send("database not ready");
+  }
+});
+
+app.get("/healthz-lb", (req, res) => {
   res.status(200).send("ok");
 });
 
