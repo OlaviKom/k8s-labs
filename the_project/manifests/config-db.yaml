@@ -5,7 +5,7 @@ metadata:
   namespace: project
 data:
   POSTGRES_DB: todo
-  DB_HOST: todo-db-svc
+  DB_HOST: todo-db-svc-wrong
   DB_PORT: "5432"
   
 
