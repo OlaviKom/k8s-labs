@@ -26,7 +26,7 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 5 
             httpGet:
-               path: /healthz
+               path: /livez
                port: 8010
           resources:
             requests:

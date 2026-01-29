@@ -77,7 +77,7 @@ app.get("/healthz", async (req, res) => {
   }
 });
 
-app.get("/healthz-lb", (req, res) => {
+app.get("/livez", (req, res) => {
   res.status(200).send("ok");
 });
 
