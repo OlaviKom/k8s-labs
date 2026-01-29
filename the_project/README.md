@@ -12,7 +12,12 @@
 
 ## Deploy
 
-- Create GKE cluster and Artifact Registery
+- Create GKE cluster `gcloud container clusters create <cluster name> --zone=<location> --cluster-version=<versio> --disk-size=<size> --num-nodes=<num of nodes> --machine-typ=<machine>`
+- Create Artifact Registery [Documentation](https://docs.cloud.google.com/artifact-registry/docs/docker/store-docker-container-images)
+- Update GKE cluster gateway api `gcloud container clusters update <cluster name> --location=<location> --gateway-api=standard`
+- Create new service account
+- Give needed IAM roles for service account
+- Generate service account key (GKE_SA_KEY)
 - Create secrets
 - Run main.yaml GitHub Action
 
