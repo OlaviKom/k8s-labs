@@ -10,4 +10,5 @@ data:
   IMAGE_DIR: /app/data
   IMAGE_NAME: image.jpg
   TIMELIMIT: "600000"
+  BACKEND_URL: "http://todo-backend-svc:1345"
 

@@ -16,6 +16,18 @@ spec:
       containers:
         - name: todo-backend
           image: PROJECT/TODO_BACKEND_IMAGE
+          readinessProbe:
+            initialDelaySeconds: 10 
+            periodSeconds: 5 
+            httpGet:
+               path: /healthz
+               port: 8010
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5 
+            httpGet:
+               path: /healthz
+               port: 8010
           resources:
             requests:
               memory: "32Mi"

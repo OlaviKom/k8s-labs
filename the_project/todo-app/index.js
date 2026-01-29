@@ -11,6 +11,7 @@ const IMAGE_DIR = process.env.IMAGE_DIR;
 const IMAGE_NAME = process.env.IMAGE_NAME;
 const IMAGE_PATH = path.join(IMAGE_DIR, IMAGE_NAME);
 const TIMELIMIT = Number(process.env.TIMELIMIT);
+const BACKEND_URL = process.env.BACKEND_URL;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -42,7 +43,16 @@ app.get("/image", async (req, res) => {
   res.sendFile(IMAGE_PATH);
 });
 
-app.get("/healthz", (req, res) => {
+app.get("/healthz", async (req, res) => {
+  try {
+    const ready = await axios.get(`${BACKEND_URL}/healthz`);
+    res.status(200).send("ok");
+  } catch (err) {
+    res.status(500).send("Backend not ready");
+  }
+});
+
+app.get("/healthz-lb", (req, res) => {
   res.status(200).send("ok");
 });
 

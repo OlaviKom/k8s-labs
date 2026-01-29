@@ -8,7 +8,7 @@ spec:
     config:
       type: HTTP
       httpHealthCheck:
-        requestPath: /healthz
+        requestPath: /healthz-lb
         port: 8000
   
   targetRef:
@@ -27,7 +27,7 @@ spec:
     config:
       type: HTTP
       httpHealthCheck:
-        requestPath: /healthz
+        requestPath: /healthz-lb
         port: 8010
   
   targetRef:
