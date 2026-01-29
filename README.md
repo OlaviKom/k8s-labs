@@ -48,5 +48,6 @@
 ### Chapter 5
 
 - [4.1](https://github.com/OlaviKom/k8s-labs/tree/4.1)
+- [4.2](https://github.com/OlaviKom/k8s-labs/tree/4.2)
 
 ### Chapter 6
