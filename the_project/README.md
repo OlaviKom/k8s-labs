@@ -4,6 +4,7 @@
 
 - Google kubernetes Engine GKE cluster
 - Google Artifact Registery for images
+- Google service account
 - GitHub repository where are next secrets:
   - POSTGRES_USER
   - POSTGRES_PASSWORD
@@ -12,14 +13,18 @@
 
 ## Deploy
 
-- Create GKE cluster `gcloud container clusters create <cluster name> --zone=<location> --cluster-version=<versio> --disk-size=<size> --num-nodes=<num of nodes> --machine-typ=<machine>`
+- Create GKE cluster `gcloud container clusters create <cluster name> --zone=<location> --cluster-version=<versio> --disk-size=<size> --num-nodes=<num of nodes> --machine-type=<e2-medium>`
 - Create Artifact Registery [Documentation](https://docs.cloud.google.com/artifact-registry/docs/docker/store-docker-container-images)
 - Update GKE cluster gateway api `gcloud container clusters update <cluster name> --location=<location> --gateway-api=standard`
 - Create new service account
 - Give needed IAM roles for service account
-- Generate service account key (GKE_SA_KEY)
+- Generate service account key (GKE_SA_KEY) `gcloud iam service-accounts keys create ./private-key.json --iam-account=<account>`
 - Create secrets
-- Run main.yaml GitHub Action
+- Push code to GitHub and GitHub Action will run main.yaml
+- Check IP address of cluster
+- Accees the application via the external Gateway IP
+
+Note it could take some time until the gateway is set up and the IP starts responding.
 
 # Exercise 3.9
 
