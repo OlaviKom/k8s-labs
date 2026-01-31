@@ -10,22 +10,46 @@ async function addTodo() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ content: text }),
+    body: JSON.stringify({ content: text, done: false }),
   });
 
   input.value = "";
   loadTodos();
 }
 
+async function markTodoDone(id) {
+  await fetch(`/todos/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ done: true }),
+  });
+
+  loadTodos();
+}
+
 async function loadTodos() {
   const res = await fetch("/todos");
   const todos = await res.json();
-  const list = document.getElementById("todoList");
-  list.innerHTML = "";
+  const todoList = document.getElementById("todoList");
+  const doneList = document.getElementById("doneList");
+  todoList.innerHTML = "";
+  doneList.innerHTML = "";
   todos.forEach((todo) => {
     const li = document.createElement("li");
     li.textContent = todo.content;
-    list.appendChild(li);
+
+    if (todo.done) {
+      doneList.appendChild(li);
+    } else {
+      const button = document.createElement("button");
+      button.textContent = "Mark as done";
+      button.onclick = () => markTodoDone(todo.id);
+
+      li.appendChild(button);
+      todoList.appendChild(li);
+    }
   });
 }
 

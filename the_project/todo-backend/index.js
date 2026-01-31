@@ -20,7 +20,8 @@ const initDB = async () => {
   await client.query(`
     CREATE TABLE IF NOT EXISTS todo(
     id SERIAL PRIMARY KEY,
-    content TEXT NOT NULL)`);
+    content TEXT NOT NULL,
+    done BOOLEAN DEFAULT false)`);
 };
 
 app.get("/todos", async (req, res) => {
@@ -50,7 +51,7 @@ app.post("/todos", async (req, res) => {
     console.log("[TODO] Creating todo");
     const result = await client.query(
       `
-      INSERT INTO todo (content)
+      INSERT INTO todo (content, done)
       VALUES ($1)
       RETURNING *
       `,
@@ -64,6 +65,32 @@ app.post("/todos", async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error("[DB] Insert failed", err);
+    res.status(500).send("Database error");
+  }
+});
+
+app.put("/todos/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const { done } = req.body;
+
+  try {
+    const result = await client.query(
+      `
+        UPDATE todo
+        SET done = $1
+        WHERE id = $2
+        RETURNING *
+        `,
+      [done, id],
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send("Todo not found");
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("[DB] Put failed", err);
     res.status(500).send("Database error");
   }
 });
