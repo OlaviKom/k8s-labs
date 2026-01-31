@@ -51,7 +51,7 @@ app.post("/todos", async (req, res) => {
     console.log("[TODO] Creating todo");
     const result = await client.query(
       `
-      INSERT INTO todo (content, done)
+      INSERT INTO todo (content)
       VALUES ($1)
       RETURNING *
       `,

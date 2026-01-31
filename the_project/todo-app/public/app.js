@@ -10,7 +10,7 @@ async function addTodo() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ content: text, done: false }),
+    body: JSON.stringify({ content: text }),
   });
 
   input.value = "";
